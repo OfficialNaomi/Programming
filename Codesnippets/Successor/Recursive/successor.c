@@ -45,7 +45,7 @@ int main() {
 
   printf("Before: %s\n", binary_sample1);
   bool overflow1 = bitstring_successor_recursive(binary_sample1, length1);
-  print("After: %s (Overflow: %s)\n\n", binary_sample1, overflow1 ? "Yes" : "No");
+  printf("After: %s (Overflow: %s)\n\n", binary_sample1, overflow1 ? "Yes" : "No");
 
   //Test case 2: Edge case with gloval overflow (7 -> 0)
   char binary_sample2[] = "111";
@@ -53,7 +53,7 @@ int main() {
 
   printf("Before: %s\n", binary_sample2);
   bool overflow2 = bitstring_successor_recursive(binary_sample2, length2);
-  print("After: %s (Overflow: %s)\n", binary_sample2, overflow2 ? "Yes" : "No";
+  printf("After: %s (Overflow: %s)\n", binary_sample2, overflow2 ? "Yes" : "No");
 
   return 0;
 }

@@ -53,7 +53,7 @@ fn main() {
   println!("After: {} (Overflow: {}\n", binary_sample1, overflow1);
 
   // Test case 2: Edge case with global overflow (7 -> 0)
-  let mut binary_sample2 = String::from("1011");
+  let mut binary_sample2 = String::from("111");
   println!("Before: {}", binary_sample2);
   let overflow2 = bitstring_successor_recursive(&mut binary_sample2);
   println!("After: {} (Overflow: {})", binary_sample2, overflow2);

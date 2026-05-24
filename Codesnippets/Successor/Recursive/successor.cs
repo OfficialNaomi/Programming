@@ -64,7 +64,7 @@ class SuccessorRecursive
         //Test case 2: Edge case with global overflow (7 -> 0)
         string binarySample2 = "111";
         Console.WriteLine($"Before: {binarySample2}");
-        bool overflow2 = BitstringSuccessorRecursiveSuccessorRecursive(ref binarySample2);
+        bool overflow2 = BitstringSuccessorRecursive(ref binarySample2);
         Console.WriteLine($"After: {binarySample2} (Overflow: {(overflow2 ? "Yes" : "No")})");
     }
 }

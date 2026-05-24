@@ -57,7 +57,7 @@ class SuccessorRecursive
     {
         //Test case 1: Standard recursive increment (11 -> 12)
         string binarySample1 = "1011";
-        Console.WriteLine($"Before: <binarySample1}");
+        Console.WriteLine($"Before: {binarySample1}");
         bool overflow1 = BitstringSuccessorRecursive(ref binarySample1);
         Console.WriteLine( $"After: {binarySample1} (Overflow: {(overflow1 ? "Yes" : "No")})");
 

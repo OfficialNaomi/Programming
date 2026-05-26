@@ -45,10 +45,10 @@ if __name__ == "__main__":
   binary_sample1 = "1011"
   print(f"Before: {binary_sample1}")
   result1, overflow1 = bitstring_successor_recursive(binary_sample1)
-  print(f"After: {result1} (Overflow: {'Yes' if overflow1 else 'No'}\n")
+  print(f"After: {result1} (Overflow: {'Yes' if overflow1 else 'No'})\n")
 
   # Test case 2: Edge case with global overflow (7 -> 0)
   binary_sample2 = "111"
   print(f"Before: {binary_sample2}")
   result2, overflow2 = bitstring_successor_recursive(binary_sample2)
-  print(f"After: {result2} (Overflow: {'Yes' if overflow2 else 'No'}")
+  print(f"After: {result2} (Overflow: {'Yes' if overflow2 else 'No'})")

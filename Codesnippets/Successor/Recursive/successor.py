@@ -25,7 +25,7 @@ def bitstring_successor_recursive(bits: str) -> tuple[str, bool]:
   Main wrapper function for the recursive Python successor.
   Returns a tuple containing the modified string and the overflow boolean.
   """
-  if ot bits:
+  if not bits:
     return bits, False
 
   # Convert the immutable string into a mutable list of characters

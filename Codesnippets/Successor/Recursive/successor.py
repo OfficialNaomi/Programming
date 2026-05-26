@@ -8,7 +8,7 @@ def increment_bit_recursive(bits_list: list, current_index: int, carry: int) -> 
     return carry == 1
 
   # Convert character ('0' or '1') to integer (0 or 1)
-  current_bit = int(bits_list[current_index})
+  current_bit = int(bits_list[current_index])
 
   # Apply hardware gate logic using Python's bitwise operators
   new_bit = current_bit ^ carry # XOR gate

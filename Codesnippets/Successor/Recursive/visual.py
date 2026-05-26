@@ -68,19 +68,27 @@ def increment_bit_visual(bits_list: list, current_index: int, carry: int) -> boo
       pygame.quit()
       sys.exit()
 
-  # 1. Convert character to integer
+  # Check Base Case BEFORE drawing anything!
+  if current_index < 0:
+    return carry == 1
+
+  # Visual Update:
+  draw_interface(bits_list, current_index, carry)
+  pygame.time.delay(800)
+
+  # Convert character to integer
   current_bit = int(bits_list[current_index])
 
-  # 2. Apply hardware gate logic (HIER WIRD ES DEFINIERT)
-  new_bit = current_bit ^ carry # XOR gate
+  # Apply hardware gate logic
+  new_bit = current_bit ^carry # XOR gate
   next_carry = current_bit & carry # AND gate
 
-  # 3. Write the result back into the list
+  # Write the result back into the list
   bits_list[current_index] = str(new_bit)
-      
-  # Visual Update: Show the current state before processing the gates
+
+  # Visual Update: Show state right after gate execution
   draw_interface(bits_list, current_index, carry)
-  pygame.time.delay(800) # 800ms delay so human eyes (and YouTube) can follow along
+  pygame.time.delay(400)
 
   # Tail Recursion: Move left 
   return increment_bit_visual(bits_list, current_index - 1, next_carry)

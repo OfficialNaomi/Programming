@@ -67,6 +67,16 @@ def increment_bit_visual(bits_list: list, current_index: int, carry: int) -> boo
     if event.type == pygame.QUIT:
       pygame.quit()
       sys.exit()
+
+  # 1. Convert character to integer
+  current_bit = int(bits_list[current_index])
+
+  # 2. Apply hardware gate logic (HIER WIRD ES DEFINIERT)
+  new_bit = current_bit ^ carry # XOR gate
+  next_carry = current_bit & carry # AND gate
+
+  # 3. Write the result back into the list
+  bits_listp[current_index] = str(new_bit)
       
   # Visual Update: Show the current state before processing the gates
   draw_interface(bits_list, current_index, carry)

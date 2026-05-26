@@ -20,7 +20,7 @@ public class SuccessorRecursive {
     int currentBit = (bits[currentIdx] == '1') ? 1 : 0;
 
     // Apply hardware gate logic
-    int newBit = currentBit ^^ carry; // XOR gate for the new bit value
+    int newBit = currentBit ^ carry; // XOR gate for the new bit value
     int nextCarry = currentBit & carry; // AND gate for the next carry layer
 
     // Write the result back into t he array as a character

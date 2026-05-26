@@ -15,7 +15,7 @@ def increment_bit_recursive(bits_list: list, current_index: int, carry: int) -> 
   next_carry = current_bits & carry # AND gate
 
   # Write the result back into the mutalbe list as a string character
-  bits_list[current_index} = str(new_bit)
+  bits_list[current_index] = str(new_bit)
 
   # Tail Recursion: Move left to the next position
   return increment_bit_recursive(bits_list, current_index - 1, next_carry);

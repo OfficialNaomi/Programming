@@ -76,7 +76,7 @@ def increment_bit_visual(bits_list: list, current_index: int, carry: int) -> boo
   next_carry = current_bit & carry # AND gate
 
   # 3. Write the result back into the list
-  bits_listp[current_index] = str(new_bit)
+  bits_list[current_index] = str(new_bit)
       
   # Visual Update: Show the current state before processing the gates
   draw_interface(bits_list, current_index, carry)

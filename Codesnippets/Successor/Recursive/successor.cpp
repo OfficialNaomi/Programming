@@ -7,7 +7,7 @@
 bool increment_bit_recursive(std::string& bits, int current_index, int carry) {
   // Base Case: We passed the leftmost bit (index 0)
   if (current_index < 0) { 
-    // If ca rry is still 1, a global overflow occurred
+    // If carry is still 1, a global overflow occurred
     return (carry == 1);
   }
 
@@ -43,7 +43,7 @@ int main() {
   bool overflow1 = bitstring_successor_recursive(binary_sample1);
   std::cout << "After: " << binary_sample1 << "(Overflow: " << (overflow1 ? "Yes" : "No") << ")\n\n";
 
-  //Test case 2: Edge case with global overflow (7 -> 0
+  //Test case 2: Edge case with global overflow (7 -> 0)
   std::string binary_sample2 = "111";
 
   std::cout << "Before: " << binary_sample2 << std::endl;

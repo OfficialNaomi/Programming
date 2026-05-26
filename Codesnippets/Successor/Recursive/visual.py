@@ -121,6 +121,6 @@ def run_visualization(binary_string: str):
 
 if __name__=="__main__":
   # Feel free to change this string to test different values (e.g., "1111"for an overflow show)
-  test_binary = "1011"
+  test_binary = "0111"
   run_visualization(test_binary)
   pygame.quit()

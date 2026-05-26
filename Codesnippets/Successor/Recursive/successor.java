@@ -63,7 +63,7 @@ public class SuccessorRecursive {
     String binarySample1 = "1011";
     System.out.println("Before: " + binarySample1);
     String result1 = bitstringSuccessorRecursive(binarySample1);
-    System.outprintln("After: " + result1 + " (Overflow: " + (getOverflow() ? "Yes" : "No") + ")\n");
+    System.out.println("After: " + result1 + " (Overflow: " + (getOverflow() ? "Yes" : "No") + ")\n");
 
     // Test case 2: Edge case with global overflow (7 -> 0)
     String binarySample2 = "111";

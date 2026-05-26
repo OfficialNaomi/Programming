@@ -54,7 +54,7 @@ public class SuccessorRecursive {
   }
 
   // Getter method to check if the last operation caused an overflow
-  public static boolean getOverflow()) {
+  public static boolean getOverflow() {
     return hasOverflow;
   }
 

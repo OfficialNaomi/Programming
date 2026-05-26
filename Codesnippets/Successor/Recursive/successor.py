@@ -12,7 +12,7 @@ def increment_bit_recursive(bits_list: list, current_index: int, carry: int) -> 
 
   # Apply hardware gate logic using Python's bitwise operators
   new_bit = current_bit ^ carry # XOR gate
-  next_carry = current_bits & carry # AND gate
+  next_carry = current_bit & carry # AND gate
 
   # Write the result back into the mutalbe list as a string character
   bits_list[current_index] = str(new_bit)

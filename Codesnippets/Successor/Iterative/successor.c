@@ -38,7 +38,7 @@ int main(){
   char binary_sample2[] = "111";
   int length2 = strlen(binary_sample2);
 
-  printf("Before: %s\n", binray_sample2);
+  printf("Before: %s\n", binary_sample2);
   bool overflow2 = bitstring_successor_iterative(binary_sample2, length2);
   printf("After: %s (Overflow: %s)\n", binary_sample2, overflow2 ? "Yes" : "No");
 

@@ -1,24 +1,19 @@
-def increment_bit_recursive(bits_list: list, current_index: int, carry: int) -> bool:
-  """ 
-  Helper function that processes the character list from right to left recursively.
-  """
-  #Base Case: We passed the leftmost bit (index 0)
-  if current_index < 0:
-    # If carry is still 1, a global overflow occured
-    return carry == 1
-
-  # Convert character ('0' or '1') to integer (0 or 1)
-  current_bit = int(bits_list[current_index])
-
-  # Apply hardware gate logic using Python's bitwise operators
-  new_bit = current_bit ^ carry # XOR gate
-  next_carry = current_bit & carry # AND gate
-
-  # Write the result back into the mutalbe list as a string character
-  bits_list[current_index] = str(new_bit)
-
-  # Tail Recursion: Move left to the next position
-  return increment_bit_recursive(bits_list, current_index - 1, next_carry);
+def successor_tail_optimized(bits: list, index: int, carry: int = 1):
+    # Base Case: Left edge reached or carry is 0
+    if index < 0 or carry == 0:
+        return
+    
+    current_bit = 1 if bits[index] == '1' else 0
+    
+    if current_bit == 1:
+        bits[index] = '0'
+        # Pass carry left
+        successor_tail_optimized(bits, index - 1, 1)
+    else:
+        bits[index] = '1'
+        # EARLY EXIT: We found a '0', flipped it, and we are done.
+        # No recursive call is made. The stack stops growing here.
+        return
 
 def bitstring_successor_recursive(bits: str) -> tuple[str, bool]:
   """
@@ -32,7 +27,7 @@ def bitstring_successor_recursive(bits: str) -> tuple[str, bool]:
   bits_list = list(bits)
 
   # Start at the rightmost index (length - 1 with an initial carry of 1
-  overflow = increment_bit_recursive(bits_list, len(bits_list) - 1, 1)
+  overflow = successor_tail_optimized(bits_list, len(bits_list) - 1, 1)
 
   # Reconstruct the string from the modified list
   modified_string = "".join(bits_list)

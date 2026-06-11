@@ -1,28 +1,20 @@
 #include <iostream>
 #include <string>
 
-/* * Helper function that processes the std:: string from right to left recursively.
- * The string is passed by reference (&) to modify it in place without copying.
- */
-bool increment_bit_recursive(std::string& bits, int current_index, int carry) {
-  // Base Case: We passed the leftmost bit (index 0)
-  if (current_index < 0) { 
-    // If carry is still 1, a global overflow occurred
-    return (carry == 1);
-  }
+// Passing the string by reference to modify it directly
+void successorTailOptimized(std::string& bits, int index, int carry = 1) {
+    // Base Case: Out of bounds or carry consumed
+    if (index < 0 || carry == 0) return;
 
-  // Convert character ('0' or '1') to integer (0 or 1)
-  int current_bit = (bits[current_index] == '1') ? 1:0;
-
-  // Apply hardware gate logic
-  int new_bit = current_bit ^ carry; //XOR gate for the new bit value
-  int next_carry = current_bit & carry; //AND gate for the next carry layer
-
-  // Write the result back into the string
-  bits[current_index] = (new_bit == 1) ? '1': '0';
-
-  // Tail Recursion: Move left to the next bit position
-  return increment_bit_recursive(bits, current_index - 1, next_carry);
+    if (bits[index] == '1') {
+        bits[index] = '0';
+        // Tail recursive call
+        successorTailOptimized(bits, index - 1, 1);
+    } else {
+        bits[index] = '1';
+        // EARLY EXIT: We stop the recursion chain instantly.
+        return;
+    }
 }
 
 /* * Main wrapper function for the recurisive C++ successor.
@@ -32,7 +24,7 @@ bool bitstring_successor_recursive(std::string& bits) {
   if (bits.empty()){
     return false;
   }
-  return increment_bit_recursive(bits, bits.length() - 1, 1);
+  return successorTailOptimized(bits, bits.length() - 1, 1);
 }
 
 int main() {

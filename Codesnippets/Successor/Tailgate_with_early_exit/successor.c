@@ -2,32 +2,25 @@
 #include <string.h>
 #include <stdbool.h>
 
-/* * Helper function that processes the bitstring from right to left recursively
- * current_index: The bit position we are currently looking at.
- * carry: The incoming carry bit from the previous (lower) layer
+/* * Helper function that processes the string recursively.
+ * Returns true if a global overflow occurs.
  */
-bool increment_bit_recursive(char* bits, int current_index, int carry) {
-  // Base Case: We passed the leftmost bit (index 0)
-  if (current_index < 0) {
-    // If carry is still 1, a global overflow occurred
-    return (carry == 1);
-  }
+bool successor_tail_optimized(char* bits, int index, int carry) {
+    // Base Case 1: Carry is consumed. We are done.
+    if (carry == 0) return false;
+    
+    // Base Case 2: Out of bounds + carry is 1. Overflow!
+    if (index < 0) return true;
 
-  // Convert character ('0' or '1') to integer (0 or 1) for bitwise logic
-  int current_bit = bits[current_index] - '0';
-
-  // Apply hardware gate logic:
-  // XOR determines the new value of the current bit
-  int new_bit = current_bit ^carry;
-
-  // AND determines if a carry propagates to the next layer on the left
-  int next_carry = current_bit & carry;
-
-  // Write the result back as a character
-  bits[current_index] = new_bit + '0';
-
-  // Tail Recursion: Move to the next bit on the left, passing the new carry
-  return increment_bit_recursive(bits, current_index - 1, next_carry);
+    if (bits[index] == '1') {
+        bits[index] = '0';
+        // Tail recursive call
+        return successor_tail_optimized(bits, index - 1, 1);
+    } else {
+        bits[index] = '1';
+        // EARLY EXIT: We halt the function calls here. No further stack growth.
+        return false;
+    }
 }
 
 /* * Main wrapper function for the recursive successor.
@@ -35,7 +28,7 @@ bool increment_bit_recursive(char* bits, int current_index, int carry) {
  */
 bool bitstring_successor_recursive(char* bits, int length){
   // Start at the rightmost bit (length -1) with an initial carry of 1 (for +1)
-  return increment_bit_recursive(bits, length -1, 1);
+  return successor_tail_optimized(bits, length -1, 1);
 }
 
 int main() {

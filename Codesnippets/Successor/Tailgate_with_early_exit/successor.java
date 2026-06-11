@@ -8,27 +8,20 @@ public class SuccessorRecursive {
    * currentIdx: The position in the array we are currently processing.
    * carry: This incoming carry bit from the lower layer.
    */
-  private static void incrementBitRecursive(char[] bits, int currentIdx, int carry){
-    // Base Case: We passed the leftmost bit (index 0)
-    if (currentIdx < 0) {
-      // If carry is still 1, a global overflow occured
-      hasOverflow = (carry == 1);
-      return;
+  public static void successorTailOptimized(char[] bits, int index, int carry) {
+        // Base Case
+        if (index < 0 || carry == 0) return;
+
+        if (bits[index] == '1') {
+            bits[index] = '0';
+            // Tail recursive call
+            successorTailOptimized(bits, index - 1, 1);
+        } else {
+            bits[index] = '1';
+            // EARLY EXIT: Instant stop, no further calls.
+            return;
+        }
     }
-
-    // Convert character ('0'or '1') to integer (0 or 1)
-    int currentBit = (bits[currentIdx] == '1') ? 1 : 0;
-
-    // Apply hardware gate logic
-    int newBit = currentBit ^ carry; // XOR gate for the new bit value
-    int nextCarry = currentBit & carry; // AND gate for the next carry layer
-
-    // Write the result back into t he array as a character
-    bits[currentIdx] = (newBit == 1) ? '1' : '0';
-
-    // Tail Recursion: Move left to the next bit position
-    incrementBitRecursive(bits, currentIdx - 1, nextCarry);
-  }
 
   /* 
    * Main wrapper method for the recursive Java successor.
@@ -47,7 +40,7 @@ public class SuccessorRecursive {
     hasOverflow = false;
 
     // Start at the rightmost index with an initial carry of 1
-    incrementBitRecursive(charArray, charArray.length - 1, 1);
+    successorTailOptimized(charArray, charArray.length - 1, 1);
 
     // Return the freshly constructed string
     return new String(charArray);

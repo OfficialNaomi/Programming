@@ -1,23 +1,19 @@
-# Helper function that processes the string from right to left recursively.
-# In Ruby, functions automatically return the value of their last evaluated expression.
-def increment_bit_recursive(bits, current_index, carry)
-  # Base Case: We passed the leftmost bit (index 0)
-  if current_index < 0
-    return carry == 1
+# Helper function for tail recursion with early exit
+# Returns true for overflow, false otherwise
+def successor_tail_optimized(bits, index, carry = 1)
+  # Base Cases
+  return false if carry == 0
+  return true if index < 0
+
+  if bits[index] == '1'
+    bits[index] = '0'
+    # Recursive call (Ruby implicitly returns the result of the last evaluation)
+    successor_tail_optimized(bits, index - 1, 1)
+  else
+    bits[index] = '1'
+    # EARLY EXIT: Stops recursion and returns false (no overflow)
+    false
   end
-
-  # Convert the character at the current index to an integer
-  current_bit = bits[current_index].to_i
-
-  #Apply hardware gate logic
-  new_bit = current_bit ^ carry # XOR gate
-  next_carry = current_bit & carry # AND gate
-
-  # Write the result directly back into the mutable string
-  bits[current_index] = new_bit.to_s
-
-  # Tail Recursion: Move left to the next position
-  increment_bit_recursive(bits, current_index - 1, next_carry)
 end
 
 # Main wrapper function for the recursive Ruby successor.
@@ -28,7 +24,7 @@ def bitstring_successor_recursive(bits)
   end
 
   # Start at the rightmost index ( length - 1) with an initial carry of 1
-  increment_bit_recursive(bits, bits.length - 1, 1)
+  successor_tail_optimized(bits, bits.length - 1, 1)
 end
 
 # --- Test Execution ---
